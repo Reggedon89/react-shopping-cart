@@ -18,6 +18,7 @@ const cartReducer = (state = initState, action) => {
       } else {
         return { ...state, addedItems: [...state.addedItems, action.payload] };
       }
+
     case "REMOVE_ITEM":
       return {
         ...state,

@@ -2,10 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import cartReducer from "../reducers/cartReducer";
 import { remove } from "../actions/cartLoader";
+import { addToCart } from "../actions/cartLoader";
 
 export default props => {
   const addedItems = useSelector(appState => appState.addedItems);
-
+  function handleClick(id) {
+    addToCart(id);
+    console.log(id);
+  }
   return (
     <div>
       {addedItems.map(item => {
@@ -24,6 +28,13 @@ export default props => {
               }}
             >
               Remove
+            </button>
+            <button
+              onClick={() => {
+                handleClick(item.id);
+              }}
+            >
+              Add
             </button>
           </h1>
         );
