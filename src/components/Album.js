@@ -18,6 +18,7 @@ import "../styles/App.css";
 import { loadProducts } from "../actions/cartLoader";
 import { useSelector } from "react-redux";
 import { addToCart } from "../actions/cartLoader";
+import Cart from "./Cart";
 
 function MadeWithLove() {
   return (
@@ -68,22 +69,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Album() {
+  function handleClick(id) {
+    addToCart(id);
+    console.log(id);
+  }
   const product = useSelector(appState => appState.items);
-  console.log(product);
+
   useEffect(() => {
     loadProducts();
   }, []);
-  // handleClick = id => {
-  //   this.props.addToCart(id);
-  // };
-
-  const mapDispatchToProps = dispatch => {
-    return {
-      addToCart: id => {
-        dispatch(addToCart(id));
-      }
-    };
-  };
 
   const classes = useStyles();
 
@@ -146,7 +140,16 @@ export default function Album() {
                     <Typography gutterBottom variant="h5" component="h2" />
                     {card.title}
                     <Typography>{card.style}</Typography>
-                    <Typography>{card.price}</Typography>
+                    <Typography>
+                      {card.price}
+                      <div
+                        className={
+                          card.isFreeShipping ? "shipping" : "shipping hide"
+                        }
+                      >
+                        Free Shipping
+                      </div>
+                    </Typography>
                   </CardContent>
 
                   <CardActions>
@@ -156,7 +159,7 @@ export default function Album() {
                       variant="contained"
                       className={classes.root}
                       onClick={() => {
-                        this.handleClick(card.id);
+                        handleClick(card.id);
                       }}
                     >
                       Add

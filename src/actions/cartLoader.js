@@ -16,30 +16,38 @@ export function loadProducts() {
   });
 }
 //add cart action
-export const addToCart = id => {
-  return {
-    type: ADD_TO_CART,
-    id
-  };
-};
+export function addToCart(id) {
+  axios.get("http://localhost:3001/products/" + id).then(resp => {
+    store.dispatch({
+      type: "ADD_TO_CART",
+      payload: { ...resp.data, quantity: 1, total_price: resp.data.price }
+    });
+  });
+}
+export function remove(id) {
+  store.dispatch({
+    type: "REMOVE_ITEM",
+    payload: id
+  });
+}
 //remove item action
-export const removeItem = id => {
-  return {
-    type: REMOVE_ITEM,
-    id
-  };
-};
+// export const removeItem = id => {
+//   return {
+//     type: REMOVE_ITEM,
+//     id
+//   };
+// };
 //subtract qt action
-export const subtractQuantity = id => {
-  return {
-    type: SUB_QUANTITY,
-    id
-  };
-};
+// export const subtractQuantity = id => {
+//   return {
+//     type: SUB_QUANTITY,
+//     id
+//   };
+// };
 //add qt action
-export const addQuantity = id => {
-  return {
-    type: ADD_QUANTITY,
-    id
-  };
-};
+// export const addQuantity = id => {
+//   return {
+//     type: ADD_QUANTITY,
+//     id
+//   };
+// };
