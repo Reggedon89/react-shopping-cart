@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useSelector } from "react-redux";
-import { loadProducts } from "../actions/example";
+import { loadProducts } from "../actions/cartLoader";
 
 export default props => {
   const product = useSelector(appState => appState.items);

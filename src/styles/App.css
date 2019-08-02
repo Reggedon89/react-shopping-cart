@@ -10,3 +10,46 @@ html {
 
 @import url('<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /> ');
 @import url('<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />');
+
+.logo-wrapper {
+    height: 100px;
+    width: 100px;
+    text-decoration: none;
+    color: black;
+    background-image: url('logo/Sith_Empire_Logo_tn__36954_std.png');
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+
+}
+
+.nav-wrapper {
+    width: 100%;
+    border: 1px solid white;
+}
+
+.right {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    border: 1px solid white;
+    margin-bottom: -2px;
+
+}
+
+.right li {
+    margin-right: 20px;
+}
+
+.right li a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.makeStyles-cardMedia-5 {
+    height: 400px;
+}
+
+.MuiAppBar-colorPrimary {
+    background-color: black;
+}

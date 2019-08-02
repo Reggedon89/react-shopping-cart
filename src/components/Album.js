@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -14,6 +14,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Navbar from "./Navbar";
+import "../styles/App.css";
+import { loadProducts } from "../actions/cartLoader";
+import { useSelector } from "react-redux";
+import { addToCart } from "../actions/cartLoader";
 
 function MadeWithLove() {
   return (
@@ -35,9 +39,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6)
   },
-  heroButtons: {
-    marginTop: theme.spacing(4)
-  },
+  // heroButtons: {
+  //   marginTop: theme.spacing(4)
+  // },
   cardGrid: {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8)
@@ -48,7 +52,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column"
   },
   cardMedia: {
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "56.25%"
+    // 16:9
   },
   cardContent: {
     flexGrow: 1
@@ -56,23 +61,40 @@ const useStyles = makeStyles(theme => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6)
+  },
+  root: {
+    backgroundColor: "black"
   }
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export default function Album() {
+  const product = useSelector(appState => appState.items);
+  console.log(product);
+  useEffect(() => {
+    loadProducts();
+  }, []);
+  // handleClick = id => {
+  //   this.props.addToCart(id);
+  // };
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      addToCart: id => {
+        dispatch(addToCart(id));
+      }
+    };
+  };
+
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            <Navbar />
-          </Typography>
-        </Toolbar>
+      <AppBar position="relative" className={classes.root}>
+        {/* <Toolbar color="black">
+          <Typography variant="h6" color="inherit" noWrap />
+        </Toolbar> */}
+        <Navbar />
       </AppBar>
       <main>
         {/* Hero unit */}
@@ -85,7 +107,7 @@ export default function Album() {
               color="textPrimary"
               gutterBottom
             >
-              Album layout
+              Our Shirts
             </Typography>
             <Typography
               variant="h5"
@@ -93,7 +115,7 @@ export default function Album() {
               color="textSecondary"
               paragraph
             />
-            <div className={classes.heroButtons}>
+            {/* <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
                   <Button variant="contained" color="primary">
@@ -106,33 +128,38 @@ export default function Album() {
                   </Button>
                 </Grid>
               </Grid>
-            </div>
+            </div> */}
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {product.map(card => (
+              <Grid item key={card.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
+                    image={"/assets/" + card.sku + "_1.jpg"}
+                    title={card.title}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2" />
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
+                    {card.title}
+                    <Typography>{card.style}</Typography>
+                    <Typography>{card.price}</Typography>
                   </CardContent>
+
                   <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      className={classes.root}
+                      onClick={() => {
+                        this.handleClick(card.id);
+                      }}
+                    >
+                      Add
                     </Button>
                   </CardActions>
                 </Card>
