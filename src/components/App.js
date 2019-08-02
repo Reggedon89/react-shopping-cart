@@ -1,27 +1,23 @@
 import React, { Component } from "react";
+import Navbar from "./Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Products from "./Products";
-// import Album from "./Album";
+import { Provider } from "react-redux";
+import Album from "./Album";
+import store from "../store";
+import Home from "./Home";
+
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { products: [], filteredProducts: [] };
-  // }
   render() {
     return (
-      <div className="container">
-        <h1>Shopping Cart</h1>
-
-        <div className="row">
-          <div className="col">
-            <Products
-              products={this.state.filteredProducts}
-              handleAddToCart={this.handleAddToCart}
-            />
+      <BrowserRouter>
+        <Provider store={store}>
+          <div className="app-wrapper">
+            <Album />
+            {/* <Navbar /> */}
+            {/* <Home /> */}
           </div>
-          <div className="col2" />
-        </div>
-      </div>
+        </Provider>
+      </BrowserRouter>
     );
   }
 }
