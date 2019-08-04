@@ -18,7 +18,7 @@ import "../styles/App.css";
 import { loadProducts } from "../actions/cartLoader";
 import { useSelector } from "react-redux";
 import { addToCart } from "../actions/cartLoader";
-import Cart from "./Cart";
+import Filter from "./Filter";
 
 function MadeWithLove() {
   return (
@@ -126,6 +126,7 @@ export default function Album() {
             </div> */}
           </Container>
         </div>
+        <Filter />
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>

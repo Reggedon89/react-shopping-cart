@@ -30,3 +30,11 @@ export function remove(id) {
     payload: id
   });
 }
+export function filterBySize(id) {
+  axios.get("http://localhost:3001/products/" + id).then(resp => {
+    store.dispatch({
+      type: "FILTER_BY_SIZE",
+      payload: { ...remove, product_size: resp.data.availableSizes }
+    });
+  });
+}
