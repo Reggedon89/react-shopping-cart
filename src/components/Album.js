@@ -18,7 +18,6 @@ import "../styles/App.css";
 import { loadProducts } from "../actions/cartLoader";
 import { useSelector } from "react-redux";
 import { addToCart } from "../actions/cartLoader";
-import Filter from "./Filter";
 
 function MadeWithLove() {
   return (
@@ -126,7 +125,7 @@ export default function Album() {
             </div> */}
           </Container>
         </div>
-        <Filter />
+
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
@@ -142,16 +141,14 @@ export default function Album() {
                     <Typography gutterBottom variant="h5" component="h2" />
                     {card.title}
                     <Typography>{card.style}</Typography>
-                    <Typography>
-                      {card.price}
-                      <div
-                        className={
-                          card.isFreeShipping ? "shipping" : "shipping hide"
-                        }
-                      >
-                        Free Shipping
-                      </div>
-                    </Typography>
+                    <div
+                      className={
+                        card.isFreeShipping ? "shipping" : "shipping hide"
+                      }
+                    >
+                      Free Shipping
+                    </div>
+                    <Typography>{card.price}</Typography>
                   </CardContent>
 
                   <CardActions>

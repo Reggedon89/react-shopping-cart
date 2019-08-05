@@ -1,6 +1,8 @@
 const initState = {
   items: [],
   addedItems: [],
+  filteredItems: [],
+  size: "",
   total: 0
 };
 
